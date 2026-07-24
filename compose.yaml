@@ -1,0 +1,21 @@
+services:
+  console:
+    build:
+      context: ../devnet-associate-lab09
+      dockerfile: ../devnet-associate-lab10/Dockerfile
+    image: devnet/restconf-console:lab10
+    container_name: lab10-restconf-console
+    env_file:
+      - .env
+    network_mode: host
+    volumes:
+      - inventory_data:/app/instance
+      - ./certificates:/certificates:ro
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+
+volumes:
+  inventory_data:
